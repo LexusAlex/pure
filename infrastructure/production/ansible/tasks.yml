@@ -1,0 +1,5 @@
+- hosts: all
+  tasks:
+    - ansible.builtin.file:
+        name: /tmp/ansible_was_here
+        state: touch
