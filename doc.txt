@@ -1,0 +1,145 @@
+Модульная архитектура проекта
+
+Исследование темы
+
+https://habr.com/ru/company/ispring/blog/560074/
+https://www.youtube.com/watch?v=xT25xiKqPcI
+
+
+Агрегаты
+
+Подключение к бд
+https://deworker.pro/edu/series/interactive-site/db-and-orm
+db first - db - migrations - code
+code first - code - migrations - db
+
+Хорошие практики
+https://github.com/adelf/acwa_book_ru
+https://github.com/roistat/php-code-conventions
+
+Принципы хорошего кода
+
+- В коде не должны использоваться магические методы за исключением конструктора
+- Нужно стремится к использованию принципов KISS, SOLID, DRY, GRASP
+- Код должен обладать низкой связанностью
+- Должен иметь минимальную цикломатическую сложность
+- Код не должен содержать лишнего кода
+- В качестве отсутствующего значения использовать null
+- Названия boolean методов и переменных должны содержать глагол is, has или can
+- Все методы класса по умолчанию должны быть private
+- Параметры в методах должны следовать в следующем порядке: обязательные → часто используемые → редко используемые
+- Nullable параметры должны быть помечены ?, даже если указано значение по умолчанию.
+- Метод всегда должен возвращать только одну структуру данных (или null) или ничего не возвращать
+- В больших методах возвращаемая переменная должна называться $result
+- Интерфейсы имеют постфикс Interface
+- Абстрактные классы имеют префикс Abstract
+- Все свойства и константы класса по умолчанию должны быть private
+- Методы и свойства в классе должны быть отсортированы по уровням видимости и по порядку использования сверху вниз public -> protected -> private
+- Статические вызовы можно делать только у самого класса. У экземпляра можно обращаться только к его свойствам и методам
+- Вынужденные хаки должны быть помечены комментариями
+- При разработке прототипа допустимо помечать участки кода @todo
+- В условном операторе должно проверяться исключительно boolean значение
+- Использовать только $project === null сравнение
+- Только один уровень отступа в методе, для этого разложить код на методы
+- Не используйте Else
+- Оберните все примитивные типы и строки в объекты - Объекты Значений (Value Objects)
+- Только одна -> на строку
+- Сохраняйте сущности короткими
+- Не используйте статические функции
+- чем меньше «магии» в коде, тем легче его читать и поддерживать
+use Some;
+$object = new Some\Object();
+
+
+Слои внутри каждого модуля
+
+- domain (модели, репозитории, сервисы, события)
+- application
+- infrastructure
+- external dependencies
+
+
+dependency inversion
+
+create
+read
+update
+delete
+
+db
+
+postgres sql
+
+Инфраструктура как код
+
+Конфигурация ОС
+Конфигурация сторонних приложений
+Конфигурация приложения
+Приложение
+Сеть
+
+staging
+test
+production
+
+Ansible
+https://habr.com/ru/company/oleg-bunin/blog/431542/
+
+Основы DevOps - вхождение в проект с нуля
+https://www.youtube.com/watch?v=YOaIg9By0fU&t=244s
+
+https://habr.com/ru/company/oleg-bunin/blog/468537/
+
+https://hamsterden.ru/ansible-install-setup/
+
+modules
+inventories
+roles
+
+Можно писать тесты на инфраструктуру
+Получается нужно использовать виртуальную машину для локальной разработки и накатывать окружение с помощью ansible
+
+Разворачиваем окружение в докер контейнер
+docker pull debian:10
+
+dockerfile если делать все руками, но идея так себе
+
+FROM debian:10
+
+RUN apt-get update
+RUN apt-get install -y gnupg vim apt-transport-https lsb-release ca-certificates wget git nginx
+RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+RUN sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+RUN apt-get update
+RUN apt-get install -y php8.0 php8.0-cli php8.0-fpm php8.0-mcrypt php8.0-bz2 php8.0-mbstring php8.0-curl php8.0-intl php8.0-mysql php8.0-readline php8.0-xml php8.0-pgsql
+COPY php-fpm/pool.d/ /etc/php/8.0/fpm/pool.d/
+COPY php-fpm/php-fpm.conf /etc/php/8.0/fpm/php-fpm.conf
+COPY nginx/conf.d /etc/nginx/conf.d
+COPY nginx/conf.d/default.conf /etc/nginx/sites-available/default
+RUN ln -s -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+#RUN sh -c 'echo " deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main " >> /etc/apt/sources.list.d/pgdg.list'
+#RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+#RUN apt-get update
+#RUN apt-get -y install postgresql-13 postgresql-client-13
+# RUN pg_ctlcluster 13 main start
+#RUN su - postgres -c "psql -c 'CREATE USER pure WITH PASSWORD '\''test'\'';'"
+#RUN su - postgres -c "psql -c 'CREATE DATABASE puredb OWNER pure;'"
+#RUN su - postgres -c "psql -c 'GRANT ALL PRIVILEGES ON DATABASE puredb to pure;'"
+
+#COPY postgresql/postgresql.conf /etc/postgresql/13/main/postgresql.conf
+#COPY postgresql/pg_hba.conf /etc/postgresql/13/main/pg_hba.conf
+# pg_ctlcluster 13 main status
+STOPSIGNAL SIGQUIT
+EXPOSE 80 9000
+
+CMD infrastructure/development/docker/debian/cmd.sh
+
+WORKDIR /pure
+
+https://serveradmin.ru/sudo-ne-nuzhen-pri-rabote-v-konsoli-servera-tak-li-eto/
+
+Debian GNU/Linux 10 (buster)
+
+
+https://github.com/dylanaraps/neofetch
