@@ -143,3 +143,5 @@ Debian GNU/Linux 10 (buster)
 
 
 https://github.com/dylanaraps/neofetch
+
+docker-compose run --rm php-cli composer require slim/slim
