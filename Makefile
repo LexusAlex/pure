@@ -20,5 +20,8 @@ dev-docker-down-clear:
 dev-docker-nginx-exec:
 	docker-compose exec nginx /bin/bash
 # удалить вообще все в системе
-dev-remove-all-system:
+dev-docker-remove-all-system:
 	docker system prune -a
+# проверка на наличие обновлений для пакетов в соответствии с зависимостями
+dev-composer-outdated:
+	docker-compose run --rm php-cli composer outdated --direct
