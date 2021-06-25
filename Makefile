@@ -25,3 +25,6 @@ dev-docker-remove-all-system:
 # проверка на наличие обновлений для пакетов в соответствии с зависимостями
 dev-composer-outdated:
 	docker-compose run --rm php-cli composer outdated --direct
+# список установленных composer пакетов
+dev-composer-list:
+	docker-compose run --rm php-cli composer outdated -a
