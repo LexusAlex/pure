@@ -145,3 +145,144 @@ Debian GNU/Linux 10 (buster)
 https://github.com/dylanaraps/neofetch
 
 docker-compose run --rm php-cli composer require slim/slim
+docker-compose run --rm php-cli composer install
+docker-compose run --rm php-cli composer outdated --direct
+docker-compose run --rm php-cli composer require slim/psr7
+
+ composer.lock
+
+Задача команды composer update — обновить зависимости проекта до актуальных версий в соответствии с правилами,
+записанными в composer.json при этом будет создан файл composer.lock
+
+Задача команды composer install — установить зафиксированные зависимости проекта.
+
+по умолчанию всегда и везде используем composer install.
+Коммитим composer.lock в репозиторий.
+Используем composer update только для намеренных обновлений.
+При конфликте в composer.lock во время merge/rebase принимаем любую версию файла. Затем выполняем composer update, чтобы гарантированно получить composer.lock, соответствующий composer.json.
+
+
+run slim framework
+-------------------
+// для создания экземляра приложения необходим обьект от интерфейса ResponseFactoryInterface
+// использовать можно совершенно разные его реализации
+class ResponseFactory implements \Psr\Http\Message\ResponseFactoryInterface
+{
+    public function createResponse(int $code = 200, string $reasonPhrase = ''): \Psr\Http\Message\ResponseInterface
+    {
+        return (new \Laminas\Diactoros\Response());
+        //return (new \Slim\Psr7\Response());
+    }
+}
+
+$responceFactory = new ResponseFactory();
+//так же в объект могут перередаваться следующие компоненты
+// container - контейнер внедрения зависимостей
+// callableResolver - штука которая достает объекты из контейнера внедрения зависимостей
+// routeCollector - Класс который занимается маршрутами
+// routeResolver - Менеджер маршрутов
+// middlewareDispatcher - Диспетчер промежуточного ПО
+$application = new \Slim\App($responceFactory,
+                    null,
+                null,
+                 null,
+                  null,
+            null
+);
+
+//\Slim\Factory\AppFactory::setSlimHttpDecoratorsAutomaticDetection(false);
+//\Slim\Factory\ServerRequestCreatorFactory::setSlimHttpDecoratorsAutomaticDetection(false);
+
+$application = \Slim\Factory\AppFactory::create();
+
+$application->get('/', function ($request, $response) {
+    echo '<pre>';
+    print_r($request);
+    $response->getBody()->write('124');
+    return $response;
+});
+
+// сейчас у нас создан объект приложения, теперь требуется его запустить
+$application->run();
+
+//$app = \Slim\Factory\AppFactory::create();
+-------------------
+Минимум зависимостей.
+
+psr стандарты
+
+psr-7
+psr/http-message
+
+Общий набор интерфейсов, для написания фреймворко-независимого кода.
+
+Как правило в любом приложении существуют два объекта Request и Response.
+
+Сообщения
+Заголовки
+Тело сообщения
+Запрос
+Ответ
+
+https://www.php-fig.org/psr/psr-7/
+https://habr.com/ru/post/250343/
+https://habr.com/ru/post/458484/
+https://odan.github.io/2019/12/05/slim4-doctrine-dbal.html
+
+
+https://github.com/php-fig/http-message
+
+psr-17
+
+PSR-17 описывает общий стандарт для фабрик, которые создают HTTP-объекты, совместимые с PSR-7.
+
+Содержит рекомендации как создавать http объекты
+
+psr-15
+PSR-15: HTTP Server Request Handlers
+
+RequestHandlerInterface
+MiddlewareInterface
+Спецификация данного стандарта описывает интерфейсы для обработчиков HTTP-запросов
+и компонентов промежуточного программного обеспечения HTTP-сервера. то есть мидлваре
+
+PSR-11: Container interface
+
+https://github.com/PHP-DI/PHP-DI
+
+Основная цель стандартизировать, как фреймворки и библиотеки будут использовать (DIC) контейнер для доступа к объектам и параметрам. Для этого был описан ContainerInterface.
+
+
+// Database settings
+$settings['db'] = [
+    'driver' => 'pdo_pgsql',
+    'host' => 'postgres',
+    'dbname' => 'pure',
+    'user' => 'alex',
+    'password' => 'test',
+    //'charset' => 'utf8_general_ci',
+    //'collation' => 'utf8mb4_unicode_ci',
+    'driverOptions' => [
+        // Turn off persistent connections
+        PDO::ATTR_PERSISTENT => false,
+        // Enable exceptions
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        // Emulate prepared statements
+        PDO::ATTR_EMULATE_PREPARES => true,
+        // Set default fetch mode to array
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ],
+];
+
+$config = new \Doctrine\DBAL\Configuration();
+$connectionParams = $settings['db'];
+
+$connect = \Doctrine\DBAL\DriverManager::getConnection($connectionParams, $config);
+$connectWrapper = $connect->getWrappedConnection();
+
+$queryBuilder = $connect->createQueryBuilder();
+
+echo "<pre>";
+print_r($queryBuilder);
+
+//https://odan.github.io/
