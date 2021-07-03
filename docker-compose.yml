@@ -32,6 +32,17 @@ services:
             - postgres:/var/lib/postgresql/data
         ports:
             - "54321:5432"
+    mysql:
+        image: mysql:8.0
+        environment:
+            MYSQL_USER: alex
+            MYSQL_PASSWORD: test
+            MYSQL_ROOT_PASSWORD: test
+            MYSQL_DATABASE: pure
+        volumes:
+            - mysql:/var/lib/mysql
+        ports:
+            - "3306:3306"
     nginx-frontend:
         build:
             context: ./infrastructure/development/docker/debian/nginx-frontend
@@ -58,3 +69,4 @@ services:
             - ./frontend:/pure/frontend
 volumes:
     postgres:
+    mysql:

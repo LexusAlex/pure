@@ -5,7 +5,7 @@ RUN mv $PHP_INI_DIR/php.ini-development $PHP_INI_DIR/php.ini
 RUN apt-get update \
     && apt-get install -y libpq-dev \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql
+    && docker-php-ext-install pdo_pgsql pdo_mysql
 
 RUN apt install unzip
 
