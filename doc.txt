@@ -343,3 +343,11 @@ Done in 36.72s.
 },
 
 docker-compose run --rm node-cli yarn install
+docker-compose run --rm node-cli yarn upgrade @testing-library/react
+docker-compose run --rm node-cli yarn upgrade @testing-library/user-event
+docker-compose run --rm node-cli yarn upgrade web-vitals
+
+Папка build это корень для деплоя
+
+Разделяем приложение на модули
+https://deworker.pro/edu/series/interactive-site/react-test-lint 13.28
