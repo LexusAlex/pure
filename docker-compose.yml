@@ -5,13 +5,13 @@ services:
             context: ./infrastructure/development/docker/debian/php-cli
             dockerfile: Dockerfile
         volumes:
-            - ./:/pure
+            - ./backend:/pure/backend
     php-fpm:
         build:
             context: ./infrastructure/development/docker/debian/php-fpm
             dockerfile: Dockerfile
         volumes:
-            - ./:/pure
+            - ./backend:/pure/backend
     nginx:
         build:
             context: ./infrastructure/development/docker/debian/nginx
@@ -19,7 +19,7 @@ services:
         ports:
             - "80:80"
         volumes:
-            - ./:/pure
+            - ./backend:/pure/backend
         depends_on:
             - php-fpm
     postgres:

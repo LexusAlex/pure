@@ -1,6 +1,6 @@
 {
     "name": "lexusalex/pure",
-    "description": "",
+    "description": "clean architecture",
     "type": "project",
     "license": "BSD-3-Clause",
     "config": {
