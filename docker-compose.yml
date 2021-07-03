@@ -12,12 +12,12 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./backend:/pure/backend
-    nginx:
+    nginx-backend:
         build:
-            context: ./infrastructure/development/docker/debian/nginx
+            context: ./infrastructure/development/docker/debian/nginx-backend
             dockerfile: Dockerfile
         ports:
-            - "80:80"
+            - "8081:8081"
         volumes:
             - ./backend:/pure/backend
         depends_on:
@@ -32,5 +32,29 @@ services:
             - postgres:/var/lib/postgresql/data
         ports:
             - "54321:5432"
+    nginx-frontend:
+        build:
+            context: ./infrastructure/development/docker/debian/nginx-frontend
+            dockerfile: Dockerfile
+        ports:
+            - "80:80"
+        volumes:
+            - ./frontend:/pure/frontend
+        depends_on:
+            - node
+    node:
+        build:
+            context: ./infrastructure/development/docker/debian/node
+            dockerfile: Dockerfile
+        volumes:
+            - ./frontend:/pure/frontend
+        command: yarn start
+        tty: true
+    node-cli:
+        build:
+            context: ./infrastructure/development/docker/debian/node
+            dockerfile: Dockerfile
+        volumes:
+            - ./frontend:/pure/frontend
 volumes:
     postgres:

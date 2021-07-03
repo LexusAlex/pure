@@ -305,3 +305,41 @@ https://github.com/php-casbin/php-casbin
 Сначала пишем тесты, то есть внешние проектирование.
 Для экономии ресурсов тестируйте только то что видно снаружи
 Сделать собственные класс для исключений
+
+REACT
+
+Установка тестового приложения
+устанавливаем через yarn
+docker-compose run --rm node-cli yarn create react-app my-app
+docker-compose exec node /bin/bash
+
+Success! Created my-app at /pure/frontend/my-app
+Inside that directory, you can run several commands:
+
+  yarn start
+    Starts the development server.
+
+  yarn build
+    Bundles the app into static files for production.
+
+  yarn test
+    Starts the test runner.
+
+  yarn eject
+    Removes this tool and copies build dependencies, configuration files
+    and scripts into the app directory. If you do this, you can’t go back!
+
+We suggest that you begin by typing:
+
+  cd my-app
+  yarn start
+
+Happy hacking!
+Done in 36.72s.
+
+для девелоперрских пакетов
+"devDependencies": {
+
+},
+
+docker-compose run --rm node-cli yarn install

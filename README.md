@@ -10,6 +10,7 @@
     - соберет контейнеры на основании docker-compose файла.
     - запустит контейнеры в фоновом режиме.
 3. Выполнить `docker-compose run --rm php-cli composer install`, для установки зависимостей composer (всегда используйте composer install)
+4. Выполнить `docker-compose run --rm node-cli yarn install`, для установки зависимостей фронтенда
     
 _вся процедура займет не больше 5 минут._
 
