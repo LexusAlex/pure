@@ -346,6 +346,13 @@ docker-compose run --rm node-cli yarn install
 docker-compose run --rm node-cli yarn upgrade @testing-library/react
 docker-compose run --rm node-cli yarn upgrade @testing-library/user-event
 docker-compose run --rm node-cli yarn upgrade web-vitals
+docker-compose run --rm node-cli yarn add eslint --dev
+docker-compose run --rm node-cli yarn run eslint --init
+docker-compose run --rm node-cli yarn add stylelint stylelint-config-standard --dev
+docker-compose run --rm node-cli yarn add eslint-plugin-prettier stylelint-prettier --dev
+docker-compose run --rm node-cli yarn run prettier
+docker-compose run --rm node-cli yarn add --dev --exact prettier
+docker-compose run --rm node-cli yarn add --dev eslint-config-prettier
 
 Папка build это корень для деплоя
 

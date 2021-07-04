@@ -46,3 +46,15 @@ dev-yarn-test-watch:
 # запуск тестов фронтенда без слежения за изменяемыми файлами
 dev-yarn-test-no-watch:
 	docker-compose run --rm node-cli yarn test --watchAll=false
+# линтер js файлов
+dev-yarn-jslint:
+	docker-compose run --rm node-cli yarn eslint
+# исправление js файлов
+dev-yarn-jslint-fix:
+	docker-compose run --rm node-cli yarn eslint-fix
+# линтер css файлов
+dev-yarn-csslint:
+	docker-compose run --rm node-cli yarn stylelint
+# исправление файлов фронтенда, только code style
+dev-yarn-prettier:
+	docker-compose run --rm node-cli yarn prettier
