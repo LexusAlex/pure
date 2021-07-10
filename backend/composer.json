@@ -7,6 +7,11 @@
         "process-timeout": 0,
         "sort-packages": true
     },
+    "autoload": {
+        "psr-4": {
+            "Pure\\": "src/"
+        }
+    },
     "require": {
         "ext-pdo": "*",
         "doctrine/dbal": "^3.1",
