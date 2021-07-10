@@ -11,6 +11,9 @@ https://www.youtube.com/watch?v=gDEFVplbB4Q
 symfony/serializer
 symfony/validator
 
+
+инструмент  symfony/console progressbar
+
 Агрегаты
 
 Подключение к бд
@@ -91,6 +94,9 @@ Ansible
 https://habr.com/ru/company/oleg-bunin/blog/431542/
 Установка
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
+
+Свежий образ ansible
+https://mirror.yandex.ru/debian-cd/current/amd64/iso-cd/
 
 Основы DevOps - вхождение в проект с нуля
 https://www.youtube.com/watch?v=YOaIg9By0fU&t=244s
@@ -320,7 +326,7 @@ Inside that directory, you can run several commands:
     Starts the development server.
 
   yarn build
-    Bundles the app into static files for production.
+    Bundles the app into static files for production.ё
 
   yarn test
     Starts the test runner.
@@ -358,3 +364,18 @@ docker-compose run --rm node-cli yarn add --dev eslint-config-prettier
 
 Разделяем приложение на модули
 https://deworker.pro/edu/series/interactive-site/react-test-lint 13.28
+
+Модули делим по зонам ответственности
+Gateway - общий шлюз куда попадают запросы в зависимости от их типа нужно написать отдельные контроллеры для каждого типа
+- Http
+- Cli
+- Mobile
+index-slim.php входной скрипт для использования slim framework, это публичная часть api
+
+Тесты
+Функциональные тесты проверяют контроллеры
+Unit проверяют отдельные единицы
+Приемочные тесты - это общие тесты, которые проверяют все приложение
+
+composer install --no-dev
+docker-compose run --rm php-cli composer require phpunit/phpunit --dev
