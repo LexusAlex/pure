@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pure\Module\Common\Test\Functional\Slim;
+namespace Test\Functional\Slim;
 
 /**
  * @internal

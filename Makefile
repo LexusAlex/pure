@@ -31,6 +31,15 @@ dev-composer-outdated:
 # список установленных composer пакетов
 dev-composer-list:
 	docker-compose run --rm php-cli composer outdated -a
+# Обновить карту классов composer по умолчанию
+dev-composer-autoload:
+	docker-compose run --rm php-cli composer dump-autoload
+# Обновить карту классов composer для прода без dev зависимостей
+dev-composer-autoload-no-dev:
+	docker-compose run --rm php-cli composer dump-autoload --no-dev
+# Запуск тестов phpunit
+dev-composer-test:
+	docker-compose run --rm php-cli composer test
 # проверка на наличие обновлений для пакетов в соответствии с зависимостями для фронтенда
 dev-yarn-outdated:
 	docker-compose run --rm node-cli yarn outdated

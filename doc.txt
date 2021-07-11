@@ -109,6 +109,12 @@ modules
 inventories
 roles
 
+
+ansible -m ping all
+
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.88.218
+
+
 Можно писать тесты на инфраструктуру
 Получается нужно использовать виртуальную машину для локальной разработки и накатывать окружение с помощью ansible
 
@@ -266,6 +272,18 @@ https://github.com/PHP-DI/PHP-DI
 
 Основная цель стандартизировать, как фреймворки и библиотеки будут использовать (DIC) контейнер для доступа к объектам и параметрам. Для этого был описан ContainerInterface.
 
+Контейнер внедрения зависимостей в slim framework работает следующем образом:
+При создании объекта контейнер ищет его по имени и выполняет инструкции которые
+там написаны. Контейнер умеет автоматически парсить конструкторы классов. Автовайринг.
+
+При создании объекта контейнер через рефлексию спарсит параметры конструктора.
+DI необходимо указать что вместо интерфейса нужно использовать класс который мы указали
+к примеру
+ResponseFactoryInterface::class => static function (): ResponseFactoryInterface {
+        return new ResponseFactory();
+    },
+
+То есть нашел соответствие что нужно создать
 
 // Database settings
 $settings['db'] = [
@@ -379,3 +397,6 @@ Unit проверяют отдельные единицы
 
 composer install --no-dev
 docker-compose run --rm php-cli composer require phpunit/phpunit --dev
+docker-compose run --rm php-cli composer require php-di/php-di
+
+
