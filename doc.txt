@@ -377,6 +377,7 @@ docker-compose run --rm node-cli yarn add eslint-plugin-prettier stylelint-prett
 docker-compose run --rm node-cli yarn run prettier
 docker-compose run --rm node-cli yarn add --dev --exact prettier
 docker-compose run --rm node-cli yarn add --dev eslint-config-prettier
+docker-compose run --rm node-cli yarn add --dev @cucumber/cucumber
 
 Папка build это корень для деплоя
 
@@ -395,8 +396,23 @@ index-slim.php входной скрипт для использования sli
 Unit проверяют отдельные единицы
 Приемочные тесты - это общие тесты, которые проверяют все приложение
 
+Браузерные E2E-тесты
+Эмулируют действия пользователя
+BDD - тесты проверяющие поведение
+Интергационные Unit тесты
+
+Типы тестов
+https://deworker.pro/edu/series/interactive-site/e2e-tests
+
 composer install --no-dev
 docker-compose run --rm php-cli composer require phpunit/phpunit --dev
 docker-compose run --rm php-cli composer require php-di/php-di
+docker-compose run --rm php-cli composer require vlucas/phpdotenv
+docker-compose run --rm php-cli composer require laminas/laminas-config-aggregator
+
+TODO создавать фаил .env автоматически
+
+
+Event-Driven Design. Ослабление связей
 
 

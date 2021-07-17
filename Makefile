@@ -67,5 +67,6 @@ dev-yarn-csslint:
 # исправление файлов фронтенда, только code style
 dev-yarn-prettier:
 	docker-compose run --rm node-cli yarn prettier
+# запуск тестов cucumber
 dev-cucumber-e2e-run:
 	docker-compose run --rm node-cli yarn e2e

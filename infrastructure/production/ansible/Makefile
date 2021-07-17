@@ -14,3 +14,5 @@ list-tasks:
 	ansible-playbook -i hosts.yml tasks.yml --list-tasks --list-hosts
 poweroff:
 	ansible -m shell -a "init 0" all -i hosts.yml
+build:
+	ansible-playbook -i hosts.yml soft/nginx.yml
