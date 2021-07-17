@@ -12,7 +12,8 @@
             "Pure\\": "src/"
         },
         "files": [
-            "configuration/slim/config.php"
+            "configuration/config.php",
+            "configuration/slim/slim-config.php"
         ]
     },
     "autoload-dev": {
@@ -29,6 +30,7 @@
         "ramsey/uuid": "^4.1",
         "slim/psr7": "^1.4",
         "slim/slim": "^4.8",
+        "symfony/console": "^5.3",
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
@@ -36,6 +38,7 @@
     },
     "scripts": {
         "test": "phpunit --colors=always",
-        "test-generate-configuration": "phpunit --generate-configuration --colors=always"
+        "test-generate-configuration": "phpunit --generate-configuration --colors=always",
+        "console": "php public/index-symfony-console.php --ansi"
     }
 }

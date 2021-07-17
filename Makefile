@@ -40,6 +40,9 @@ dev-composer-autoload-no-dev:
 # Запуск тестов phpunit
 dev-composer-test:
 	docker-compose run --rm php-cli composer test
+# Запуск команды test в консоли
+dev-composer-console:
+	docker-compose run --rm php-cli composer console test
 # проверка на наличие обновлений для пакетов в соответствии с зависимостями для фронтенда
 dev-yarn-outdated:
 	docker-compose run --rm node-cli yarn outdated

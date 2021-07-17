@@ -8,10 +8,7 @@ use DI\Container;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
 use Exception;
-use Laminas\ConfigAggregator\ConfigAggregator;
-use Laminas\ConfigAggregator\PhpFileProvider;
 use Pure\Gateway\Http\Slim\Controllers\HomeController\IndexAction;
-use RuntimeException;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
@@ -30,16 +27,6 @@ function container(): Container
     $builder->addDefinitions(dependencies());
 
     return $builder->build();
-}
-
-function dependencies(): array
-{
-    $aggregator = new ConfigAggregator([
-        new PhpFileProvider(__DIR__ . '/environments/common/*.php'),
-        new PhpFileProvider(__DIR__ . '/environments/' . env('PURE_ENV', 'prod') . '/*.php'),
-    ]);
-
-    return $aggregator->getMergedConfig();
 }
 
 function middleware(App $app): void
@@ -63,23 +50,3 @@ function application(): void
     routes($app);
     $app->run();
 }
-
-function env(string $name, ?string $default = null): string
-{
-    $value = getenv($name);
-
-    if ($value !== false) {
-        return $value;
-    }
-
-    if ($default !== null) {
-        return $default;
-    }
-
-    throw new RuntimeException('Undefined env ' . $name);
-}
-
-
-
-
-
