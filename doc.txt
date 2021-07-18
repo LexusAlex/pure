@@ -448,3 +448,15 @@ Continuous Integration - Непрерывная интеграция
 Continuous Delivery - Непрерывная доставка
 Continuous Deployment - Непрерывное развертывание
 https://deworker.pro/edu/series/interactive-site/ci-cd-philosophy досмотреть
+
+Отправка писем
+docker-compose run --rm php-cli composer require swiftmailer/swiftmailer
+docker-compose run --rm php-cli composer require finesse/swiftmailer-defaults-plugin
+docker-compose run --rm php-cli composer require twig/twig
+https://swiftmailer.symfony.com/docs/introduction.html
+
+mailer_encryption на dev tcp на проде tls
+
+https://demo-auction.deworker.pro
+
+Письма нужно стилизовать инлайн классами

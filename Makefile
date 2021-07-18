@@ -1,3 +1,5 @@
+# поднимаем все
+up: dev-docker-up
 # скачать образы
 dev-docker-pull:
 	docker-compose pull

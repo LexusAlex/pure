@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Pure\Gateway\Console\Symfony\Commands\MailerCheckCommand;
 use Pure\Gateway\Console\Symfony\Commands\TestCommand;
 
 return [
@@ -9,6 +10,7 @@ return [
         'console' => [
             'commands' => [
                 TestCommand::class,
+                MailerCheckCommand::class
             ],
         ],
     ],

@@ -6,12 +6,26 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./backend:/pure/backend
+        environment:
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: pure
+            MAILER_PASSWORD: password
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: info@pure.test
     php-fpm:
         build:
             context: ./infrastructure/development/docker/debian/php-fpm
             dockerfile: Dockerfile
         volumes:
             - ./backend:/pure/backend
+        environment:
+            MAILER_HOST: mailer
+            MAILER_PORT: 1025
+            MAILER_USER: pure
+            MAILER_PASSWORD: password
+            MAILER_ENCRYPTION: tcp
+            MAILER_FROM_EMAIL: info@pure.test
     nginx-backend:
         build:
             context: ./infrastructure/development/docker/debian/nginx-backend
@@ -67,6 +81,10 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ./frontend:/pure/frontend
+    mailer:
+        image: mailhog/mailhog
+        ports:
+            - "8082:8025"
 volumes:
     postgres:
     mysql:
