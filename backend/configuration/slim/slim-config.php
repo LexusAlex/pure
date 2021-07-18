@@ -9,8 +9,10 @@ use DI\ContainerBuilder;
 use Dotenv\Dotenv;
 use Exception;
 use Pure\Gateway\Http\Slim\Controllers\HomeController\IndexAction;
+use Pure\Gateway\Http\Slim\Controllers\V1\Authentication\JoinByEmailController\RequestAction;
 use Slim\App;
 use Slim\Factory\AppFactory;
+use Slim\Routing\RouteCollectorProxy;
 
 function loadDotEnv()
 {
@@ -31,12 +33,18 @@ function container(): Container
 
 function middleware(App $app): void
 {
+    $app->addErrorMiddleware(true, true, true);
     $app->addBodyParsingMiddleware();
 }
 
 function routes(App $app): void
 {
     $app->get('/', IndexAction::class);
+    $app->group('/v1', function (RouteCollectorProxy $group): void {
+        $group->group('/authentication', function (RouteCollectorProxy $group): void {
+            $group->get('/join-by-email', RequestAction::class);
+        });
+    });
 }
 
 /**

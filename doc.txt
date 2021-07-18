@@ -409,10 +409,42 @@ docker-compose run --rm php-cli composer require phpunit/phpunit --dev
 docker-compose run --rm php-cli composer require php-di/php-di
 docker-compose run --rm php-cli composer require vlucas/phpdotenv
 docker-compose run --rm php-cli composer require laminas/laminas-config-aggregator
+docker-compose run --rm php-cli composer require symfony/console
+docker-compose run --rm php-cli composer require webmozart/assert
 
+запуск консольной команды
+docker-compose run --rm php-cli php public/index-symfony-console.php test
+docker-compose run --rm php-cli composer console test
 TODO создавать фаил .env автоматически
+
+Начинаем создавать агрегат
+
+Обрабатываем use case - регистрация пользователей у нас в системе
+https://elisdn.ru/blog/104/domain-entities-modelling
+https://deworker.pro/edu/series/interactive-site/user-registration
+
+Создаем класс DTO /home/alex/projects/pure/backend/src/Module/Authentication/Application/Command/JoinByEmail/Request/Command.php эти данные мы будем принимать из вне
+Создадим обработчик для этой команды
+
+
+Как это работает
+1. Запрос от клиента RequestAction
+2. Парсинг параметров запроса
+3. Вызов нужного сервиса $this->userService->joinByEmail
+4. Создание команды и заполнение ее результатом
+5. Вызов нужного обработчика $this->joinByEmailHandler->handle
+6. Создание пользователя и добавление его с помощью репозитория в хранилище
 
 
 Event-Driven Design. Ослабление связей
 
+Конфиги
+Один главный конфиг configuration/config.php содержит объединяющий код для всех других конфигов
 
+Continuous Integration - Непрерывная интеграция
+
+Рабочая ветка
+
+Continuous Delivery - Непрерывная доставка
+Continuous Deployment - Непрерывное развертывание
+https://deworker.pro/edu/series/interactive-site/ci-cd-philosophy досмотреть

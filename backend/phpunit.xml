@@ -12,6 +12,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>src/Module/Common/Test/Unit</directory>
+            <directory>src/Module/Authentication/Test/Unit</directory>
         </testsuite>
         <testsuite name="functional">
             <directory>src/Module/Common/Test/Functional</directory>
