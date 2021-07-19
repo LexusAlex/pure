@@ -75,3 +75,6 @@ dev-yarn-prettier:
 # запуск тестов cucumber
 dev-cucumber-e2e-run:
 	docker-compose run --rm node-cli yarn e2e
+# пингуем продакшеновские серваки
+prod-ping:
+	cd infrastructure/production/ansible && $(MAKE) ping
