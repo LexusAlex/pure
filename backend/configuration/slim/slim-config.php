@@ -6,7 +6,6 @@ namespace Pure;
 
 use DI\Container;
 use DI\ContainerBuilder;
-use Dotenv\Dotenv;
 use Exception;
 use Pure\Gateway\Http\Slim\Controllers\HomeController\IndexAction;
 use Pure\Gateway\Http\Slim\Controllers\V1\Authentication\JoinByEmailController\RequestAction;
@@ -14,11 +13,6 @@ use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Routing\RouteCollectorProxy;
 
-function loadDotEnv()
-{
-    $dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../../');
-    $dotenv->load();
-}
 /**
  * @throws Exception
  */
@@ -52,7 +46,6 @@ function routes(App $app): void
  */
 function application(): void
 {
-    loadDotEnv();
     $app = AppFactory::createFromContainer(\Pure\container());
     middleware($app);
     routes($app);

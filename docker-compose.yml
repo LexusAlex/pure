@@ -13,6 +13,18 @@ services:
             MAILER_PASSWORD: password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: info@pure.test
+            PURE_ENV: dev
+            PURE_DISPLAY_DETAILS: 1
+            PURE_DEBUG: 1
+            PURE_POSTGRES_HOST: postgres
+            PURE_POSTGRES_USER: alex
+            PURE_POSTGRES_PASSWORD: test
+            PURE_POSTGRES_DB: pure
+            PURE_MYSQL_HOST: mysql
+            PURE_MYSQL_USER: alex
+            PURE_MYSQL_PASSWORD: test
+            PURE_MYSQL_ROOT_PASSWORD: test
+            PURE_MYSQL_DATABASE: pure
     php-fpm:
         build:
             context: ./infrastructure/development/docker/debian/php-fpm
@@ -26,6 +38,18 @@ services:
             MAILER_PASSWORD: password
             MAILER_ENCRYPTION: tcp
             MAILER_FROM_EMAIL: info@pure.test
+            PURE_ENV: dev
+            PURE_DISPLAY_DETAILS: 1
+            PURE_DEBUG: 1
+            PURE_POSTGRES_HOST: postgres
+            PURE_POSTGRES_USER: alex
+            PURE_POSTGRES_PASSWORD: test
+            PURE_POSTGRES_DB: pure
+            PURE_MYSQL_HOST: mysql
+            PURE_MYSQL_USER: alex
+            PURE_MYSQL_PASSWORD: test
+            PURE_MYSQL_ROOT_PASSWORD: test
+            PURE_MYSQL_DATABASE: pure
     nginx-backend:
         build:
             context: ./infrastructure/development/docker/debian/nginx-backend
