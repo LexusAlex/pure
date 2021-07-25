@@ -1,5 +1,7 @@
 # поднимаем все
 up: dev-docker-up
+# останавливаем контейнеры
+down: dev-docker-down
 # скачать образы
 dev-docker-pull:
 	docker-compose pull
@@ -45,6 +47,12 @@ dev-composer-test:
 # Запуск команды test в консоли
 dev-composer-console:
 	docker-compose run --rm php-cli composer console test
+# Запуск валадиции схемы doctrine pgsql
+dev-composer-doctrine-pgsql-validate:
+	docker-compose run --rm php-cli composer doctrine-pgsql orm:validate-schema
+# Запуск валадиции схемы doctrine mysql
+dev-composer-doctrine-mysql-validate:
+	docker-compose run --rm php-cli composer doctrine-mysql orm:validate-schema
 # проверка на наличие обновлений для пакетов в соответствии с зависимостями для фронтенда
 dev-yarn-outdated:
 	docker-compose run --rm node-cli yarn outdated
@@ -78,3 +86,8 @@ dev-cucumber-e2e-run:
 # пингуем продакшеновские серваки
 prod-ping:
 	cd infrastructure/production/ansible && $(MAKE) ping
+# гасим продакшеновские сервера
+prod-poweroff:
+	cd infrastructure/production/ansible && $(MAKE) poweroff
+prod-install:
+	cd infrastructure/production/ansible && $(MAKE) install

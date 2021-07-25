@@ -15,7 +15,9 @@ function dependencies(): array
         new PhpFileProvider(__DIR__ . '/symfony/environments/common/*.php'),
         new PhpFileProvider(__DIR__ . '/swift_mailer/environments/common/*.php'),
         new PhpFileProvider(__DIR__ . '/twig/environments/common/*.php'),
+        new PhpFileProvider(__DIR__ . '/doctrine/environments/common/*.php'),
         new PhpFileProvider(__DIR__ . '/slim/environments/' . env('PURE_ENV', 'prod') . '/*.php'),
+        new PhpFileProvider(__DIR__ . '/doctrine/environments/' . env('PURE_ENV', 'prod') . '/*.php')
     ]);
 
     return $aggregator->getMergedConfig();

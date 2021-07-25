@@ -32,6 +32,7 @@
         "slim/psr7": "^1.4",
         "slim/slim": "^4.8",
         "swiftmailer/swiftmailer": "^6.2",
+        "symfony/cache": "^5.3",
         "symfony/console": "^5.3",
         "twig/twig": "^3.3",
         "webmozart/assert": "^1.10"
@@ -42,6 +43,8 @@
     "scripts": {
         "test": "phpunit --colors=always",
         "test-generate-configuration": "phpunit --generate-configuration --colors=always",
-        "console": "php public/index-symfony-console.php --ansi"
+        "console": "php public/index-symfony-console.php --ansi",
+        "doctrine-pgsql": "php public/index-symfony-doctrine-pgsql-console.php --ansi",
+        "doctrine-mysql": "php public/index-symfony-doctrine-mysql-console.php --ansi"
     }
 }
