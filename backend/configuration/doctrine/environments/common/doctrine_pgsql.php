@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\UnderscoreNamingStrategy;
 use Doctrine\ORM\Tools\Setup;
 use Psr\Container\ContainerInterface;
+use Pure\Module\Common\Domain\Entities\User\Types\IdType;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use function Pure\env;
@@ -74,10 +75,11 @@ return [
             ],
             'subscribers' => [],
             'metadata_dirs' => [
-                //__DIR__ . '/../../src/Auth/Entity',
+                __DIR__ . '/../../../../src/Module/Common/Domain/Entities',
                 //__DIR__ . '/../../src/OAuth/Entity',
             ],
             'types' => [
+                IdType::NAME => IdType::class
                 //Auth\Entity\User\IdType::NAME => Auth\Entity\User\IdType::class,
                 //Auth\Entity\User\EmailType::NAME => Auth\Entity\User\EmailType::class,
                 //Auth\Entity\User\RoleType::NAME => Auth\Entity\User\RoleType::class,

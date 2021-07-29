@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Pure\Module\Common\Domain\Entities\User;
+namespace Pure\Module\Common\Domain\Entities\User\Types;
 
 use JetBrains\PhpStorm\Pure;
 use Ramsey\Uuid\Uuid;

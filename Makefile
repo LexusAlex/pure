@@ -47,12 +47,29 @@ dev-composer-test:
 # Запуск команды test в консоли
 dev-composer-console:
 	docker-compose run --rm php-cli composer console test
-# Запуск валадиции схемы doctrine pgsql
-dev-composer-doctrine-pgsql-validate:
+# Запуск валидации схемы базы данных doctrine pgsql
+dev-composer-doctrine-pgsql-validate-schema:
 	docker-compose run --rm php-cli composer doctrine-pgsql orm:validate-schema
-# Запуск валадиции схемы doctrine mysql
-dev-composer-doctrine-mysql-validate:
+# Создание таблиц на основе схемы базы данных pgsql
+dev-composer-doctrine-pgsql-create-schema:
+	docker-compose run --rm php-cli composer doctrine-pgsql orm:schema-tool:create
+# Удаление таблиц на основе схемы базы данных pqsql
+dev-composer-doctrine-pgsql-drop-schema:
+	docker-compose run --rm php-cli composer doctrine-pgsql orm:schema-tool:drop -- --force
+# Запуск валидации схемы doctrine mysql
+dev-composer-doctrine-mysql-validate-schema:
 	docker-compose run --rm php-cli composer doctrine-mysql orm:validate-schema
+# Создание таблиц на основе схемы базы данных mysql
+dev-composer-doctrine-mysql-create-schema:
+	docker-compose run --rm php-cli composer doctrine-mysql orm:schema-tool:create
+# Удаление таблиц на основе схемы базы данных mysql
+dev-composer-doctrine-mysql-drop-schema:
+	docker-compose run --rm php-cli composer doctrine-mysql orm:schema-tool:drop -- --force
+
+dev-composer-doctrine-mysql-migration-diff:
+	docker-compose run -u 1000:1000 --rm php-cli composer doctrine-mysql migrations:diff
+dev-composer-doctrine-pgsql-migration-diff:
+	docker-compose run -u 1000:1000 --rm php-cli composer doctrine-pgsql migrations:diff
 # проверка на наличие обновлений для пакетов в соответствии с зависимостями для фронтенда
 dev-yarn-outdated:
 	docker-compose run --rm node-cli yarn outdated

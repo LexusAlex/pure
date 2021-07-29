@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Pure\Module\Authentication\Application\Command\JoinByEmail\Request;
 
-use Pure\Module\Common\Domain\Entities\User\Id;
+use Pure\Module\Common\Domain\Entities\User\Types\Id;
 use Pure\Module\Common\Domain\Entities\User\User;
 use Pure\Module\Common\Infrastructure\Repository\UserRepository;
 

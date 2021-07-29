@@ -15,6 +15,6 @@ list-tasks:
 poweroff:
 	ansible -m shell -a "init 0" all -i hosts.yml
 install:
-	ansible-playbook -i hosts.yml soft/nginx/nginx_install.yml
+	ansible-playbook -i hosts.yml soft/php/php_install.yml
 uninstall:
 	ansible-playbook -i hosts.yml soft/nginx/nginx_uninstall.yml

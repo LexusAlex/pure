@@ -15,6 +15,7 @@ final class UserService
     {
         $this->joinByEmailHandler= $joinByEmailHandler;
     }
+
     public function joinByEmail($data)
     {
         $command = new Command();

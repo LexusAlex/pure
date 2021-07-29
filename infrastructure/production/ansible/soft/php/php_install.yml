@@ -1,0 +1,36 @@
+---
+- name: Install php 8.0
+  hosts: all
+  become: yes
+  tasks:
+    - name: Installation install software-properties-common
+      apt: name=software-properties-common
+
+    - name: Repo PHP 8.0
+      apt_repository:
+        repo: deb https://packages.sury.org/php/ buster main
+
+    - name: Updating the repo
+      apt: update_cache=yes
+
+    - name: Installation PHP 8.0
+      apt: name=php8.0 state=present
+
+    - name: install php modules
+      apt:
+        pkg:
+          - php8.0-fpm
+          - php8.0-cli
+          - php8.0-mysql
+          - php8.0-pgsql
+          - php8.0-mcrypt
+          - php8.0-bz2
+          - php8.0-mbstring
+          - php8.0-curl
+          - php8.0-json
+          - php8.0-zip
+          - php8.0-intl
+          - php8.0-xml
+          - php8.0-readline
+        state: present
+        update_cache: yes

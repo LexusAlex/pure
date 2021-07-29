@@ -6,7 +6,7 @@ namespace Test\Unit\Domain\Entities\User;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Pure\Module\Common\Domain\Entities\User\Id;
+use Pure\Module\Common\Domain\Entities\User\Types\Id;
 use Ramsey\Uuid\Uuid;
 
 final class IdTest extends TestCase
