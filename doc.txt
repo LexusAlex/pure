@@ -285,6 +285,9 @@ ResponseFactoryInterface::class => static function (): ResponseFactoryInterface 
 
 То есть нашел соответствие что нужно создать
 
+База данных
+https://deworker.pro/edu/series/interactive-site/db-and-orm
+
 // Database settings
 $settings['db'] = [
     'driver' => 'pdo_pgsql',
@@ -459,4 +462,32 @@ mailer_encryption на dev tcp на проде tls
 
 https://demo-auction.deworker.pro
 
-Письма нужно стилизовать инлайн классами
+Письма нужно стилизовать инлайн классами, так же удобно для этого использовать twig
+
+Установка php https://www.techbeginner.in/2021/01/how-to-install-php-using-ansible.html
+
+Пишем сначала код, а потом привязываем к бд
+
+docker-compose run --rm php-cli php /vendor/bin/doctrine
+docker-compose run --rm php-cli composer require symfony/cache
+
+Маппинг сущностей
+https://deworker.pro/edu/series/interactive-site/orm-mapping
+
+Миграции и фикстуры
+docker-compose run --rm php-cli composer require doctrine/migrations 33.00
+
+php public/index-symfony-doctrine-pgsql-console.php --ansi 'migrations:diff'
+
+ Generated new migration class to "/pure/backend/configuration/doctrine/environments/common/../../../../src/Module/Common/Data/Migration/Pgsql/Version20210726194434.php"
+
+ To run just this migration for testing purposes, you can use migrations:execute --up 'Pure\\Module\\Common\\Data\\Migration\\Pgsql\\Version20210726194434'
+
+ To revert the migration you can use migrations:execute --down 'Pure\\Module\\Common\\Data\\Migration\\Pgsql\\Version20210726194434'
+
+Фикстуры , удобно заполнять тестовыми данными базу данных
+ docker-compose run --rm php-cli composer require doctrine/data-fixtures --dev
+
+Логирование
+
+https://deworker.pro/edu/series/interactive-site/logger

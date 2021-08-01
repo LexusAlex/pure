@@ -39,6 +39,7 @@
         "webmozart/assert": "^1.10"
     },
     "require-dev": {
+        "doctrine/data-fixtures": "^1.5",
         "phpunit/phpunit": "^9.5"
     },
     "scripts": {

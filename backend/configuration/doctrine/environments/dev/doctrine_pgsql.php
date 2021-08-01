@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-//use App\Data\Doctrine\FixDefaultSchemaSubscriber;
+use Pure\Module\Common\Data\Events\Doctrine\FixDefaultSchemaSubscriber;
 
 return [
     'config' => [
@@ -11,7 +11,7 @@ return [
             'cache_dir' => null,
             'proxy_dir' => __DIR__ . '/../../../../var/cache/' . PHP_SAPI . '/doctrine/pgsql/proxy',
             'subscribers' => [
-                //FixDefaultSchemaSubscriber::class,
+                FixDefaultSchemaSubscriber::class,
             ],
         ],
     ],
