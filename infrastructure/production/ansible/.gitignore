@@ -1,2 +1,2 @@
-hosts.yml
+inventory/hosts.yml
 ansible.log

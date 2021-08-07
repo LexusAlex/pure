@@ -1,0 +1,10 @@
+---
+- name: All config
+  hosts: all
+  remote_user: root
+  vars_files:
+    - vars/vars_prod.yml
+  roles:
+    #- common
+    # - php
+    - nginx

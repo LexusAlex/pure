@@ -1,0 +1,25 @@
+---
+- name: update and package cache
+  apt:
+    update_cache: yes
+
+- name: upgrade apt to the latest packages
+  apt:
+    upgrade: dist
+
+- name: remove usseles package
+  apt:
+    autoclean: yes
+
+- name: remove useless dependencies
+  apt:
+    autoremove: yes
+- name: install sofware
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - software-properties-common
+      - gnupg2
+      - ca-certificates
+      - apt-transport-https
