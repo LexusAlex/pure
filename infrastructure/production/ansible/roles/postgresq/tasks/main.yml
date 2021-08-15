@@ -1,0 +1,67 @@
+---
+- name: add key postgresql
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+- name: add nginx repo deb
+  apt_repository:
+    repo: deb http://apt.postgresql.org/pub/repos/apt buster-pgdg main
+    state: present
+    filename: pgdg
+
+- name: install of postgresql
+  apt:
+    name: postgresql
+    update_cache: yes
+    state: latest
+    install_recommends: yes
+
+- name: start postgresql
+  service:
+    name: postgresql
+    enabled: yes
+
+- name: configuration postgresql.conf
+  lineinfile:
+    path: /etc/postgresql/13/main/postgresql.conf
+    insertafter: 'Connection Settings'
+    line: listen_addresses = '*'
+    state: present
+    backup: yes
+
+- name: configuration pg_hba.conf
+  lineinfile:
+    path: /etc/postgresql/13/main/pg_hba.conf
+    insertafter: '# TYPE'
+    line: host all all 192.168.88.0/32 md5
+    state: present
+    backup: yes
+
+- name: install sofware
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - libpq-dev
+      - python3-psycopg2
+
+# Доделать, не работает создание пользователя и бд
+- name: creates db and user
+  become: yes
+  block:
+    - postgresql_user:
+        name: postgres
+        password: "'{{ lookup('env', 'PG_PASS_DEFAULT') }}'"
+    - postgresql_user:
+        db: "'{{ lookup('env', 'PG_DB') }}'"
+        name: "'{{ lookup('env', 'PG_USER') }}'"
+        password: "'{{ lookup('env', 'PG_PASS') }}'"
+        state: present
+        expires: infinity
+        priv: ALL
+
+- name: restart postgresql
+  service:
+    name: postgresql
+    state: restarted

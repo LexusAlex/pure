@@ -1,0 +1,7 @@
+---
+- name: set environments
+  lineinfile:
+    path: /etc/environment
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }}={{ item.value}}"
+  with_items: "{{ os_environment }}"
