@@ -11,6 +11,7 @@ use Pure\Gateway\Http\Slim\Controllers\HomeController\IndexAction;
 use Pure\Gateway\Http\Slim\Controllers\V1\Authentication\JoinByEmailController\RequestAction;
 use Slim\App;
 use Slim\Factory\AppFactory;
+use Slim\Middleware\ErrorMiddleware;
 use Slim\Routing\RouteCollectorProxy;
 
 /**
@@ -27,7 +28,8 @@ function container(): Container
 
 function middleware(App $app): void
 {
-    $app->addErrorMiddleware(true, true, true);
+    //$app->addErrorMiddleware((bool)env('PURE_DEBUG'), env('PURE_ENV') !== 'test', true);
+    $app->add(ErrorMiddleware::class);
     $app->addBodyParsingMiddleware();
 }
 

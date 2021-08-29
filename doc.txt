@@ -95,6 +95,23 @@ https://habr.com/ru/company/oleg-bunin/blog/431542/
 Установка
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu
 
+
+Модули ansible
+- Выполняются на клиентах
+- Выполняются при подключении
+
+Плагины ansible
+- Выполняются на хост машине
+- Выполняются до подключения
+
+yaml преобразутся в python команды
+
+Можно задавать переменные для группы или для хостов, группировать можно
+как угодно. group_vars
+
+
+https://docs.ansible.com/ansible/2.7/modules/apt_module.html
+
 Свежий образ ansible
 https://mirror.yandex.ru/debian-cd/current/amd64/iso-cd/
 
@@ -488,6 +505,15 @@ php public/index-symfony-doctrine-pgsql-console.php --ansi 'migrations:diff'
 Фикстуры , удобно заполнять тестовыми данными базу данных
  docker-compose run --rm php-cli composer require doctrine/data-fixtures --dev
 
+https://dnevnik.dev/2020/12/23/ustanovka-nginx-mysql-8-php8-0-fpm-na-ubuntu-20-04-s-nulya/
+
+
 Логирование
 
-https://deworker.pro/edu/series/interactive-site/logger
+https://deworker.pro/edu/series/interactive-site/logger 35
+
+docker-compose logs php-fpm
+
+psr-3 logger interface
+
+docker-compose run --rm php-cli composer require monolog/monolog

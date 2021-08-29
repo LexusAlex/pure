@@ -112,3 +112,7 @@ prod-poweroff:
 	cd infrastructure/production/ansible && $(MAKE) poweroff
 prod-install:
 	cd infrastructure/production/ansible && $(MAKE) install
+prod-uninstall:
+	cd infrastructure/production/ansible && $(MAKE) uninstall
+prod-debug:
+	cd infrastructure/production/ansible && $(MAKE) debug

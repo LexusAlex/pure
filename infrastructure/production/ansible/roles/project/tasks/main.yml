@@ -1,7 +1,13 @@
 ---
-- name: set environments
-  lineinfile:
-    path: /etc/environment
-    regexp: "^{{ item.key }}"
-    line: "{{ item.key }}={{ item.value}}"
-  with_items: "{{ os_environment }}"
+- name:
+  #shell: "echo $MY_ENV_VARIABLE"
+  #environment:
+  #  MY_ENV_VARIABLE: whatever_value
+  debug:
+    msg: '{{ lookup("env", "MY_ENV_VARIABLE") }}'
+#- name: set environments
+#  lineinfile:
+#    path: /etc/environment
+#    regexp: "^{{ item.key }}"
+#    line: "{{ item.key }}={{ item.value}}"
+#  with_items: "{{ os_environment }}"

@@ -35,6 +35,7 @@
     path: /etc/postgresql/13/main/pg_hba.conf
     insertafter: '# TYPE'
     line: host all all 192.168.88.0/32 md5
+    #line: host all all all md5
     state: present
     backup: yes
 
@@ -45,21 +46,31 @@
     packages:
       - libpq-dev
       - python3-psycopg2
+      - postgresql-contrib
 
-# Доделать, не работает создание пользователя и бд
-- name: creates db and user
-  become: yes
-  block:
-    - postgresql_user:
-        name: postgres
-        password: "'{{ lookup('env', 'PG_PASS_DEFAULT') }}'"
-    - postgresql_user:
-        db: "'{{ lookup('env', 'PG_DB') }}'"
-        name: "'{{ lookup('env', 'PG_USER') }}'"
-        password: "'{{ lookup('env', 'PG_PASS') }}'"
-        state: present
-        expires: infinity
-        priv: ALL
+- name: creates user
+  postgresql_user:
+    name: "'{{ lookup('env', 'PG_USER') }}'"
+    password: "'{{ lookup('env', 'PG_PASS') }}'"
+    encrypted: true
+  become_user: postgres
+  become: true
+#- name: "Create app database"
+#  become: yes
+#  become_user: postgres
+#  postgresql_db:
+#    state: present
+#    name: "'{{ lookup('env', 'PG_DB') }}'"
+#- name: creates db and user
+#  become: yes
+#  become_user: postgres
+#  postgresql_user:
+#      db: "'{{ lookup('env', 'PG_DB') }}'"
+#      name: "'{{ lookup('env', 'PG_USER') }}'"
+#      password: "'{{ lookup('env', 'PG_PASS') }}'"
+#      state: present
+#      expires: infinity
+#      priv: CONNECT/ALL:SELECT,INSERT,UPDATE,DELETE
 
 - name: restart postgresql
   service:
